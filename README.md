@@ -12,6 +12,7 @@ This repository contains my notes, hands-on labs, mini projects, and documentati
 * ⏳ Docker
 * ⏳ Kubernetes
 
+
 ## 📂 Repository Structure
 
 ```text
@@ -27,13 +28,17 @@ This repository contains my notes, hands-on labs, mini projects, and documentati
 mini-projects/
 ```
 
-Each directory contains:
+Each topic is documented with practical and easy-to-review notes. Depending on the subject, a chapter may include:
 
-* Notes
-* Practical examples
-* Common mistakes
-* Interview tips
-* Command references
+* 📚 Concepts and notes
+* 💻 Practical examples
+* 📂 Command references
+* ⚠️ Common mistakes
+* 💡 Interview tips
+* 📝 Additional explanations and useful references
+
+The documentation grows continuously as new topics are learned throughout the Linux learning journey.
+
 
 ## 🎯 Goal
 
@@ -41,5 +46,4 @@ The goal of this repository is not only to prepare for Linux certifications, but
 
 ## 🚀 Progress
 
-This repository is continuously updated as I learn new Linux concepts and complete practical exercises.
-
+This repository is continuously updated as I study Linux Essentials, LPIC-1, and related technologies. Every topic is documented with practical examples and improved over time as my knowledge grows.
