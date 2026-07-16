@@ -70,29 +70,124 @@ Documents
 
 ## 💻 Essential Commands
 
+| Command | Purpose                             |
+| ------- | ----------------------------------- |
+| `pwd`   | Print the current working directory |
+| `cd`    | Change the current directory        |
+| `ls`    | List directory contents             |
+| `tree`  | Display the directory structure     |
+| `mkdir` | Create directories                  |
+| `touch` | Create empty files                  |
+| `cp`    | Copy files and directories          |
+| `mv`    | Move or rename files/directories    |
+| `rm`    | Remove files                        |
+| `rmdir` | Remove empty directories            |
+| `file`  | Identify the file type              |
+| `stat`  | Display detailed file information   |
+
+---
+
+## 🔍 Personal Notes
+
+These are personal discoveries and notes collected while practicing Linux. They help me remember concepts, common mistakes, and useful tricks.
+
+### 💡 Things I Learned
+
+#### Understanding the filesystem
+
+A storage device (such as an HDD or SSD) is like a large library, and files are like the books inside it.
+
+A **filesystem** is like the librarian. It organizes the books, keeps them in the right places, and knows exactly where each one is located so it can be found quickly.
+
+Without a filesystem, all data would exist on the disk without any organization.
+
+---
+
+#### Why do some commands require `-r`?
+
+The `-r` option stands for **recursive**.
+
+A directory may contain files and even other directories. When using commands like `cp` or `rm`, Linux needs permission to enter the directory and process everything inside it.
+
+Example:
+
 ```bash
-pwd
+cp -r project backup
 ```
 
-Print the current working directory.
+Copies the entire directory, including all files and subdirectories.
 
 ```bash
-cd
+rm -r project
 ```
 
-Change directory.
+Removes the directory and everything inside it.
+
+---
+
+#### Why are `rm` and `rm -r` different?
+
+`rm` removes files only.
 
 ```bash
-ls
+rm notes.txt
 ```
 
-List directory contents.
+`rm -r` removes directories recursively.
 
 ```bash
-tree
+rm -r project
 ```
 
-Display the directory structure as a tree.
+Linux does not remove directories with a simple `rm` by default because this helps prevent accidental deletion of large amounts of data.
+
+**Rule to remember:**
+
+> If a command needs to work on a directory and everything inside it, it usually requires the `-r` (recursive) option.
+
+---
+
+### 🚧 Problems I Faced
+
+#### Removing non-empty directories
+
+`rmdir` only removes **empty** directories.
+
+To remove a directory together with all of its contents:
+
+```bash
+rm -r directory_name
+```
+
+---
+
+#### Displaying the project tree
+
+To display the project structure while hiding the `.git` directory:
+
+```bash
+tree -a -I ".git"
+```
+
+Useful when documenting GitHub repositories.
+
+---
+
+#### Viewing directory information
+
+To display information about the directory itself (instead of its contents):
+
+```bash
+ls -ld directory_name
+```
+
+Example:
+
+```bash
+ls -ld linux-learning
+```
+
+Useful for checking directory permissions, ownership, and metadata.
 
 ---
 
@@ -100,8 +195,9 @@ Display the directory structure as a tree.
 
 * Confusing `/` with `~`
 * Confusing `.` with `..`
-* Using relative paths when an absolute path is required
+* Using a relative path when an absolute path is required
 * Assuming Linux uses drive letters like Windows
+* Forgetting to use `-r` when copying or removing directories
 
 ---
 
@@ -109,16 +205,19 @@ Display the directory structure as a tree.
 
 Be able to explain:
 
+* What is a filesystem?
 * Absolute Path vs Relative Path
 * `/` vs `~`
 * `.` vs `..`
 * Why Linux uses a single filesystem tree
-* Purpose of `/etc`, `/home`, and `/var`
+* Purpose of `/etc`, `/home`, `/usr`, `/var`, and `/tmp`
+* Difference between `rm` and `rm -r`
+* Meaning of the recursive (`-r`) option
 
 ---
 
 ## 📝 Summary
 
-In Linux, everything is organized under a single filesystem tree that begins at the root directory (`/`).
+The Linux filesystem is a single hierarchical tree that starts at the root directory (`/`).
 
-Understanding directories, paths, and basic navigation commands is essential before learning more advanced Linux topics.
+Understanding directories, paths, navigation commands, and basic filesystem operations is essential before learning more advanced Linux topics such as permissions, links, storage management, and mounting filesystems.
