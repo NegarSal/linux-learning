@@ -1,229 +1,131 @@
-# Text Processing
+# Text Processing 📝
 
-## Overview
+## 📚 Overview
 
 Text processing is one of the most important skills in Linux. Most Linux tools follow the Unix philosophy:
 
-> Do one thing and do it well.
+> **Do one thing and do it well.**
 
 Instead of using one large program, Linux combines many small tools together using pipelines (`|`).
 
-This section contains the basic text-processing commands learned during Linux Essentials.
+---
+
+## 🧠 Key Concepts
+
+- **Text Processing** → Reading, filtering, sorting, and manipulating text.
+- **Pipeline (`|`)** → Pass the output of one command to another.
+- **Standard Input (stdin)** → Input received from another command or keyboard.
+- **Standard Output (stdout)** → Default command output.
 
 ---
 
-# Commands
+## 💻 Essential Commands
 
-## cat
+| Command | Purpose | Example |
+|---------|---------|---------|
+| `cat` | Display file contents | `cat file.txt` |
+| `less` | View large files page by page | `less file.txt` |
+| `head` | Show the beginning of a file | `head -5 file.txt` |
+| `tail` | Show the end of a file | `tail -5 file.txt` / `tail -f logfile` |
+| `grep` | Search text inside files | `grep "text" file` |
+| `cut` | Extract specific fields | `cut -d ":" -f1 /etc/passwd` |
+| `sort` | Sort lines | `sort file.txt` |
+| `uniq` | Remove adjacent duplicate lines | `sort file.txt \| uniq` |
+| `wc` | Count lines, words, or bytes | `wc -l file.txt` |
+| `tee` | Display and save output simultaneously | `command \| tee output.txt` |
 
-### Purpose
+---
 
-Display the contents of one or more files.
+## 🔍 Personal Notes
 
-### Syntax
+### 💡 Things I Learned
+
+- `tail -f` is useful for monitoring log files in real time.
+- `uniq` only removes **adjacent** duplicate lines, so it is usually used after `sort`.
+
+### Useful `grep` options
+
+| Option | Purpose |
+|--------|---------|
+| `-i` | Ignore case |
+| `-n` | Show line numbers |
+| `-v` | Invert match |
+| `-c` | Count matching lines |
+
+### Useful `cut` options
+
+| Option | Purpose |
+|--------|---------|
+| `-d` | Specify delimiter |
+| `-f` | Select field |
+
+### Useful `sort` options
+
+| Option | Purpose |
+|--------|---------|
+| `-r` | Reverse order |
+| `-n` | Numeric sort |
+| `-u` | Remove duplicate lines after sorting |
+
+### Useful `uniq` options
+
+| Option | Purpose |
+|--------|---------|
+| `-c` | Count duplicate lines |
+| `-d` | Show only duplicated lines |
+
+### Useful `wc` options
+
+| Option | Purpose |
+|--------|---------|
+| `-l` | Count lines |
+| `-w` | Count words |
+| `-c` | Count bytes |
+
+---
+
+### 🚧 Problems I Faced
+
+#### `uniq` did not remove all duplicate lines
+
+I learned that `uniq` only removes **consecutive** duplicate lines.
+
+The correct approach is:
 
 ```bash
-cat file.txt
-```
-
-### Examples
-
-```bash
-cat /etc/passwd
-```
-
----
-
-## less
-
-### Purpose
-
-View large files page by page.
-
-### Syntax
-
-```bash
-less file.txt
-```
-
-Useful keys:
-
-* Space → Next page
-* b → Previous page
-* /text → Search
-* q → Quit
-
----
-
-## head
-
-### Purpose
-
-Display the beginning of a file.
-
-### Syntax
-
-```bash
-head file.txt
-head -5 file.txt
-```
-
----
-
-## tail
-
-### Purpose
-
-Display the end of a file.
-
-### Syntax
-
-```bash
-tail file.txt
-tail -5 file.txt
-tail -f logfile
-```
-
----
-
-## grep
-
-### Purpose
-
-Search for text inside files.
-
-### Syntax
-
-```bash
-grep "text" file
-```
-
-### Useful options
-
-* `-i` Ignore case
-* `-n` Show line numbers
-* `-v` Invert match
-* `-c` Count matches
-
----
-
-## cut
-
-### Purpose
-
-Extract specific fields from each line.
-
-### Syntax
-
-```bash
-cut -d ":" -f1 /etc/passwd
-```
-
-### Useful options
-
-* `-d` Delimiter
-* `-f` Field number
-
----
-
-## sort
-
-### Purpose
-
-Sort lines alphabetically or numerically.
-
-### Useful options
-
-* `-r` Reverse order
-* `-n` Numeric sort
-* `-u` Remove duplicate lines after sorting
-
----
-
-## uniq
-
-### Purpose
-
-Remove adjacent duplicate lines.
-
-### Useful options
-
-* `-c` Count duplicate lines
-* `-d` Show only duplicated lines
-
-> Note: `uniq` only removes consecutive duplicate lines. It is usually used together with `sort`.
-
----
-
-## wc
-
-### Purpose
-
-Count lines, words, or bytes.
-
-### Useful options
-
-* `-l` Lines
-* `-w` Words
-* `-c` Bytes
-
----
-
-## tee
-
-### Purpose
-
-Display output on the screen and save it to a file at the same time.
-
-### Syntax
-
-```bash
-command | tee output.txt
+sort file.txt | uniq
 ```
 
 ---
 
-# Pipelines
+## ⚠️ Common Mistakes
 
-One of Linux's greatest strengths is combining commands together.
-
-Example:
-
-```bash
-cut -d ":" -f7 /etc/passwd | sort | uniq
-```
-
-Example:
-
-```bash
-grep "/bin/bash" /etc/passwd | wc -l
-```
+- Using `uniq` without `sort`
+- Forgetting the delimiter when using `cut`
+- Using `sort` instead of `sort -n` for numbers
+- Confusing `wc -l` (lines) with `wc -w` (words)
+- Forgetting that `tee` both displays and saves output
 
 ---
 
-# Common Mistakes
+## 💡 Interview Tips
 
-* Using `uniq` without `sort`.
-* Forgetting the delimiter when using `cut`.
-* Using `sort` instead of `sort -n` for numbers.
-* Confusing `wc -l` (lines) with `wc -w` (words).
-* Forgetting that `tee` both displays and saves output.
+Be able to explain:
+
+- `cat` vs `less`
+- `head` vs `tail`
+- `grep`
+- `cut`
+- `sort`
+- `uniq`
+- `wc`
+- `tee`
+- Why `uniq` is usually used with `sort`
+- How pipelines (`|`) work
 
 ---
 
-# Summary
+## 📝 Summary
 
-Commands covered in this section:
+Linux text-processing tools are designed to work together. Commands like `grep`, `cut`, `sort`, `uniq`, `wc`, and `tee` are essential for filtering, analyzing, and processing text, especially when combined with pipelines.
 
-* cat
-* less
-* head
-* tail
-* grep
-* cut
-* sort
-* uniq
-* wc
-* tee
-
-These commands form the foundation of text processing in Linux and will be used throughout LPIC-1, Bash scripting, and DevOps.
